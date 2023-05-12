@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,29 +15,49 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyTestScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class MyTestScreen extends StatelessWidget {
+  MyTestScreen({Key? key}) : super(key: key);
 
-  final String title;
+  final bool switchValue = true;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  final double _width = 300;
+  final double _height = 300;
+  final Color _color = Colors.green;
+  final BorderRadiusGeometry _borderRadius = BorderRadius.circular(8);
 
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Provider Homework'),
+        centerTitle: true,
       ),
       body: Center(
-        child: Column(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            AnimatedContainer(
+              width: _width,
+              height: _height,
+              decoration: BoxDecoration(
+                color: _color,
+                borderRadius: _borderRadius,
+              ),
+              duration: const Duration(seconds: 1),
+              curve: Curves.fastOutSlowIn,
+            ),
+            CupertinoSwitch(
+              value: switchValue,
+              activeColor: Colors.blue,
+              onChanged: (bool? value) {},
+            ),
+          ],
+        ),
       ),
     );
   }
